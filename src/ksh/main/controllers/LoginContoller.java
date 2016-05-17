@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
  
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/sign-in")
 public class LoginContoller {
  
 	@RequestMapping(method = RequestMethod.GET)
@@ -16,11 +16,11 @@ public class LoginContoller {
  
 		System.out.println("????????????????????");
 		String message = new java.util.Date().toGMTString();		
-		return new ModelAndView("ct/login", "time", message);
+		return new ModelAndView("sign-in", "time", message);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView login(@RequestParam("userName") String username, @RequestParam("password") String password) {
+	public ModelAndView login(@RequestParam("j_username") String username, @RequestParam("j_password") String password) {
 		System.out.println(">>>>>>>>>>>>>>>>>");
 		System.out.println(username + ">>>>>>>>>>>>>>>>" + password);
 		System.out.println(">>>>>>>>>>>>>>>>>");

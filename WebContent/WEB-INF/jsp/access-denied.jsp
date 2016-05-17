@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="sign-in">Go To Login Page</a>
+<h1><b><center>ACCESS DENIED</center></b></h1>
 </body>
 </html>
