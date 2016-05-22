@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1><b><center>ACCESS DENIED</center></b></h1>
+<p>Time on the server is ${time}</p>
 </body>
 </html>

@@ -7,6 +7,6 @@
 </head>
 <body>
 	<h1>Scarlett</h1>
-	<p>${user}</p>
+	<p>Time on the server is ${time}</p>
 </body>
 </html>

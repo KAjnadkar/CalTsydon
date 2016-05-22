@@ -12,11 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginContoller {
  
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView goToLogin() {
- 
+	public ModelAndView goToLogin() { 
 		System.out.println("????????????????????");
 		String message = new java.util.Date().toGMTString();		
-		return new ModelAndView("sign-in", "time", message);
+		return new ModelAndView("login", "time", message);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
