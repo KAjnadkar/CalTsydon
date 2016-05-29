@@ -15,7 +15,7 @@ public class LoginContoller {
 	public ModelAndView goToLogin() { 
 		System.out.println("????????????????????");
 		String message = new java.util.Date().toGMTString();		
-		return new ModelAndView("login", "time", message);
+		return new ModelAndView("sign-in", "time", message);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

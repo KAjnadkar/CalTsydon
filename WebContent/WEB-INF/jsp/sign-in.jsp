@@ -11,7 +11,7 @@
 	<h1>Titania</h1>
 	<p>Time on the server is ${time}</p>
 
-	<form action="<c:url value='/login'/>" method="POST">
+	<form name="f" action="<c:url value='/login'/>" method="POST">
 		<label for="username">User Name:</label> <input id="username" name="username" type="text" /> <label for="password">Password:</label>
 		<input id="password" name="password" type="password" /> <input type="submit" value="Log In" />
 		<input type="hidden"  name="${_csrf.parameterName}" value="${_csrf.token}" />
