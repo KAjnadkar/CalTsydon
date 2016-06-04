@@ -19,10 +19,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-//	  http.authorizeRequests()
-//		.antMatchers("/ct/**").access("hasRole('ROLE_USER')")		
-//		.and().formLogin().loginPage("/login").failureUrl("/access-denied").successForwardUrl("/ct/ct-home")
-//		.and().csrf();
+	  http.authorizeRequests()
+		.antMatchers("/ct/**").access("hasRole('ROLE_USER')")		
+		.and().formLogin().loginPage("/login").failureUrl("/access-denied").successForwardUrl("/ct/ct-home")
+		.and().csrf();
 		
 	}
 }
