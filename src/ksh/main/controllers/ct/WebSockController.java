@@ -15,6 +15,7 @@ public class WebSockController {
     @SendTo("/topic/greetings")
     public GreetingsFromServer greeting(GreetingsFromClient message) throws Exception {
         Thread.sleep(3000); // simulated delay
+        System.out.println(">>>>>>>>>>>>>>" + message.getGreeting());
         return new GreetingsFromServer("Hello, " + message.getGreeting() + "!");
     }
 

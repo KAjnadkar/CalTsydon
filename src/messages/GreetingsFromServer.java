@@ -1,18 +1,18 @@
 package messages;
 
 public class GreetingsFromServer {
-	private String greetings;
+	private String greeting;
 	
+	public String getGreeting() {
+		return greeting;
+	}
+
+	public void setGreeting(String greeting) {
+		this.greeting = greeting;
+	}
+
 	public GreetingsFromServer(String g) {
-		this.greetings = g;
+		this.greeting = g;
 	}
-
-	public String getGreetings() {
-		return greetings;
-	}
-
-	public void setGreetings(String greetings) {
-		this.greetings = greetings;
-	}	
 	
 }
