@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @ComponentScan({ "ksh.main.controllers" })
-@Import({SecurityConfig.class})
+@Import({SecurityConfig.class, WebSocketConfig.class})
 public class RootConfig {
-
+	
 }
