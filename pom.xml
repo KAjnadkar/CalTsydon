@@ -42,6 +42,8 @@
         <spring.security>4.1.0.RELEASE</spring.security>
         <timestamp>${maven.build.timestamp}</timestamp>
         <jackson>2.7.4</jackson>
+        <hibernate>5.1.0.Final</hibernate>
+        <mysql.connector>5.1.39</mysql.connector>
     </properties>
 	
 	<dependencies>
@@ -81,6 +83,17 @@
 			<version>${spring}</version>
 		</dependency>
 		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring}</version>
+        </dependency>
+        
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>4.2.5.RELEASE</version>
+		</dependency>        
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>${spring.security}</version>
@@ -100,6 +113,17 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${spring.security}</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector}</version>
+        </dependency>		
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>${hibernate}</version>
+		</dependency>      
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
