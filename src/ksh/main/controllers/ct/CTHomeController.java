@@ -8,8 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CTHomeController {
 	@RequestMapping("/ct/ct-home")	
 	public ModelAndView goToCTHome() {	 
-		System.out.println("Going to CT Home");
-		String message = new java.util.Date().toGMTString();		
-		return new ModelAndView("/ct/ct-home", "time", message);
+		System.out.println("Going to CT Home");		
+		return new ModelAndView("/ct/ct-home");
 	}
 }

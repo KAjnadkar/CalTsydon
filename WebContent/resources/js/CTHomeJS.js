@@ -15,7 +15,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/hello');
+    var socket = new SockJS('/initConversation');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         setConnected(true);
@@ -36,9 +36,9 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function sendName() {
-    var name = document.getElementById('name').value;
-    stompClient.send("/app/hello", {}, JSON.stringify({ 'greeting': name }));
+function sendquestionOrTopic() {
+	var questionOrTopic = document.getElementById('questionOrTopic').value;
+	window.location.href = "/ct/responses?q=" + questionOrTopic;
 }
 
 function showGreeting(message) {	

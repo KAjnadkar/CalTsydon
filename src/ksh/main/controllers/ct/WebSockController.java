@@ -14,7 +14,7 @@ public class WebSockController {
 
 	@Autowired private SimpMessagingTemplate template;
 
-    @MessageMapping("/hello")
+    @MessageMapping("/initConversation")
     public void greeting(GreetingsFromClient message) throws Exception {
     	String[] messages = {"message1","message2","message3","message4","message5"};
     	for(int i=0 ; i<messages.length ; i++){
