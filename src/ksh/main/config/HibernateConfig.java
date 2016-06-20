@@ -14,26 +14,41 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import ksh.main.ct.dao.ConversationDao;
 import ksh.main.ct.dao.ConversationDaoImpl;
+import ksh.main.models.ct.Conversation;
 
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "ksh.main.controllers" })
+@ComponentScan({ "ksh.main.controllers", "ksh.main.ct.dao", "ksh.main.models.ct" })
 public class HibernateConfig {
  
 //    @Autowired
 //    private Environment environment;
  
-    @Bean
-    public LocalSessionFactoryBean sessionFactory() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] { "ksh.main.controllers", "ksh.main.ct.dao", "ksh.main.models.ct" });
-        sessionFactory.setHibernateProperties(hibernateProperties());
-        return sessionFactory;
-     }
+//    @Bean
+//    public LocalSessionFactoryBean sessionFactory() {
+//        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+//        sessionFactory.setDataSource(dataSource());
+//        sessionFactory.setPackagesToScan(new String[] { "ksh.main.controllers", "ksh.main.ct.dao", "ksh.main.models.ct" });
+//        sessionFactory.setHibernateProperties(hibernateProperties());
+//        return sessionFactory;
+//     }
+	
+	@Autowired
+	@Bean(name = "sessionFactory")
+	public SessionFactory getSessionFactory(DataSource dataSource) {
+
+		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
+
+		sessionBuilder.addAnnotatedClasses(Conversation.class);
+		sessionBuilder.scanPackages("ksh.main.controllers", "ksh.main.ct.dao", "ksh.main.models.ct");
+		sessionBuilder.addProperties(hibernateProperties());
+
+		return sessionBuilder.buildSessionFactory();
+	}
      
     @Bean
     public DataSource dataSource() {
@@ -54,7 +69,7 @@ public class HibernateConfig {
         return properties;        
     }
      
-    @Bean
+    @Bean(name = "transactionManager")
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory s) {
        HibernateTransactionManager txManager = new HibernateTransactionManager();
@@ -65,6 +80,6 @@ public class HibernateConfig {
     @Autowired
     @Bean(name = "conversationDao")
     public ConversationDao getConversationDao(SessionFactory sessionFactory) {
-    	return new ConversationDaoImpl(sessionFactory);
+    	return new ConversationDaoImpl();
     }
 }
