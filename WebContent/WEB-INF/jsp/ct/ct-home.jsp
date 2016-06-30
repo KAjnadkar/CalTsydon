@@ -4,6 +4,8 @@
 <head>
 	<spring:url value="/js/CTHomeJS.js" var="mainJs" />
 
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+  	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Insert title here</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
