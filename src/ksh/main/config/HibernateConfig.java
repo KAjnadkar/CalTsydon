@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import ksh.main.ct.dao.ConversationDao;
 import ksh.main.ct.dao.ConversationDaoImpl;
+import ksh.main.ct.dao.MessageDao;
+import ksh.main.ct.dao.MessageDaoImpl;
 import ksh.main.models.ct.Conversation;
 
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
@@ -81,5 +83,11 @@ public class HibernateConfig {
     @Bean(name = "conversationDao")
     public ConversationDao getConversationDao(SessionFactory sessionFactory) {
     	return new ConversationDaoImpl();
+    }
+    
+    @Autowired
+    @Bean(name = "messageDao")
+    public MessageDao getMessageDao(SessionFactory sessionFactory) {
+    	return new MessageDaoImpl();
     }
 }

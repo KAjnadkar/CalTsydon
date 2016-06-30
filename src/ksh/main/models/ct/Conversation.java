@@ -1,37 +1,51 @@
 package ksh.main.models.ct;
 
-import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+
 @Entity
 @Table(name = "CONVERSATIONS")
 public class Conversation {
-	String id;
-	ArrayList<String> messages;
 	
-	public Conversation(String id, ArrayList<String> messages) {
+	@Id    
+    @Column(name = "conv_id")	
+	String id;	
+	
+	String topic;	
+	
+	String accessKey;
+	
+	public Conversation(String id, String topic) {
 		this.id = id;
-		this.messages = messages;
+		this.topic = topic;
+		this.accessKey = "key";
+	}
+	
+	public String getKey() {
+		return accessKey;
 	}
 
-	@Id    
-    @Column(name = "CONV_ID")
+	public void setKey(String key) {
+		this.accessKey = key;
+	}
+
 	public String getId() {
 		return id;
-	}
+	}	
 	
-	@Column(name = "MSGS")
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
+
 	public void setId(String id) {
 		this.id = id;
-	}
-	public ArrayList<String> getMessages() {
-		return messages;
-	}
-	public void setMessages(ArrayList<String> messages) {
-		this.messages = messages;
 	}	
 }

@@ -32,7 +32,7 @@ public class ConversationDaoImpl implements ConversationDao {
 	@Override	
 	@Transactional
 	public Conversation findConversation(long id) {
-		return new Conversation("afasfasfsa", new ArrayList<String>());		
+		return new Conversation("afasfasfsa", "afsafafasfasfsafsaf");		
 	}
 
 }

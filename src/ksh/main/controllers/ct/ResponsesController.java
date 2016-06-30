@@ -1,6 +1,9 @@
 package ksh.main.controllers.ct;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ksh.main.ct.dao.ConversationDao;
+import ksh.main.ct.dao.MessageDao;
 import ksh.main.models.ct.Conversation;
+import ksh.main.models.ct.Message;
 
 @Controller
 public class ResponsesController {
@@ -19,16 +24,18 @@ public class ResponsesController {
 	@Autowired
 	private ConversationDao conversationDao;
 	
+	@Autowired
+	private MessageDao messageDao;
+	
 	@RequestMapping("/ct/responses")	
 	public ModelAndView goToResponses(@RequestParam String q) {	 
 		System.out.println("Going to Responses" + q);
 		String message = new java.util.Date().toGMTString();	
-    	ArrayList<String> sdfa = new ArrayList<String>();
-		sdfa.add("Yes");
-		sdfa.add("Ya");
-		sdfa.add("Hell ya");
-		sdfa.add("No sweetheart");
-		conversationDao.saveConversation(new Conversation("Do you think I am stupid?", sdfa));
+    	
+		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+
+		conversationDao.saveConversation(new Conversation(uuid, q));
+		messageDao.saveMessage(new Message(uuid, uuid+"messageid", "hell yeah!!!", System.currentTimeMillis()));
 		return new ModelAndView("/ct/responses", "time", message);
 	}
 }
