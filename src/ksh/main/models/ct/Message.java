@@ -1,32 +1,26 @@
 package ksh.main.models.ct;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "MESSAGES")
 public class Message {
-
+	
 	String convId;
 	
-	@Id
-	@Column(name = "msg_id")
-	String id;
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	
 	String message;	
 	
 	Long timestamp;
 
-	public Message(String conversationId, String messageId, String message, Long timestamp) {
-		this.convId = conversationId;
-		this.id = messageId;
+	public Message(String conversationId, String message, Long timestamp) {
+		this.convId = conversationId;		
 		this.message = message;
 		this.timestamp = timestamp;		
 	}
@@ -36,14 +30,6 @@ public class Message {
 	}
 	public void setConv_id(String conv_id) {
 		this.convId = conv_id;
-	}
-
-	public String getId() {
-		return id;
-	}
-	
-	public void setId(String id) {
-		this.id = id;
 	}
 	
 	public String getMessage() {

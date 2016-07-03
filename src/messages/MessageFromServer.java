@@ -1,8 +1,8 @@
 package messages;
 
-public class GreetingsFromClient {
+public class MessageFromServer {
 	private String greeting;
-
+	
 	public String getGreeting() {
 		return greeting;
 	}
@@ -10,4 +10,9 @@ public class GreetingsFromClient {
 	public void setGreeting(String greeting) {
 		this.greeting = greeting;
 	}
+
+	public MessageFromServer(String g) {
+		this.greeting = g;
+	}
+	
 }

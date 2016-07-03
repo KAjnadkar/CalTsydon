@@ -11,21 +11,17 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>	
 	<script src="${responsesJs}"></script>
 </head>
-<body onload="disconnect()">
-	<h1 onclick="dd()">Scarlett</h1>
+<body onload="connect()">
+	<h>Scarlett</h1>
 	<p>Time on the server is ${time}</p>
 	
 	<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
     Javascript and reload this page!</h2></noscript>
 <div>
-    <div>
-        <button id="connect" onclick="connect();">Connect</button>
-        <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
-    </div>
     <div id="conversationDiv">
-        <label>What is your question or topic?</label><input type="text" id="questionOrTopic" />
-        <button id="sendName" onclick="sendquestionOrTopic();">Send</button>
-        <p id="response"></p>
+        <label>Your response</label><input type="text" id="response" />
+        <button id="sendResponse" onclick="sendResponse();">Send</button>
+        <p id="server-response"></p>
     </div>
 </div>
 </body>

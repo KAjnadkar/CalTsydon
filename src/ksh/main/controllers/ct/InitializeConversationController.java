@@ -27,8 +27,7 @@ public class InitializeConversationController {
 	@RequestMapping(value = "/ct/start-new-conversation",  method = RequestMethod.GET)	
 	public @ResponseBody String goToResponses(@RequestParam("topic") String topic) {			    	
 		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-		conversationDao.saveConversation(new Conversation(uuid, topic));
-		messageDao.saveMessage(new Message(uuid, uuid+"messageid", "hell yeah!!!", System.currentTimeMillis()));
+		conversationDao.saveConversation(new Conversation(uuid, topic));		
 		return (uuid);
 	}
 }
