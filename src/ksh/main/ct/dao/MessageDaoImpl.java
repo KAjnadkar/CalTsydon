@@ -28,9 +28,10 @@ public class MessageDaoImpl implements MessageDao {
 	}
 
 	@Override
+	@Transactional
 	public ArrayList<Message> getMessagesForConverationId(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Message> messages = (ArrayList<Message>)sessionFactory.getCurrentSession().createQuery("FROM Message m WHERE m.convId = '" + id + "'").list();
+		return messages;
 	}
 
 }

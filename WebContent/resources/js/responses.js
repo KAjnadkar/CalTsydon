@@ -8,6 +8,18 @@ function sendResponse() {
     stompClient.send("/ct/responseStream", {}, JSON.stringify(messageToServer));
 }
 
+var lastResponseReceived = "-1";
+
+function pingServer(){
+	var messageToServer = {
+	 	messageType: "requestResponses",
+	  	message: lastResponseReceived,
+	  	conversationId: gup("conv_id", window.location.href)
+	};
+	stompClient.send("/ct/responseStream", {}, JSON.stringify(messageToServer));
+	console.log("!!!!!!!!!!!!!!!!!!!!!!!");
+}
+
 var stompClient = null;
 
 
@@ -17,13 +29,15 @@ function connect() {
 	    stompClient = Stomp.over(socket);
 	    stompClient.connect({}, function(frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient.subscribe('/topic/greetings', function(greeting){
+	        stompClient.subscribe('/ct/responses', function(greeting){
 	        	console.log(">>>>>>>>>>>>>>>>>>>");
 	        	console.log(greeting);
 	            showGreeting(JSON.parse(greeting.body).greeting);
 	        });
 	    });		
 	}, 1500);
+	
+	pingServerLoop();
 }
 
 function showGreeting(message) {	
@@ -41,5 +55,12 @@ function gup( name, url ) {
     var regex = new RegExp( regexS );
     var results = regex.exec( url );
     return results == null ? null : results[1];
+}
+
+function pingServerLoop(){
+	setTimeout(function(){
+		pingServer();
+		pingServerLoop();
+	}, 8000);
 }
   

@@ -18,6 +18,12 @@ public class Message {
 	String message;	
 	
 	Long timestamp;
+	
+	public Message(){
+		this.convId = "";
+		this.message = "";
+		this.timestamp = -1L;
+	}
 
 	public Message(String conversationId, String message, Long timestamp) {
 		this.convId = conversationId;		
@@ -47,4 +53,8 @@ public class Message {
 	public void setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 	}	
+	
+	public String toString(){
+		return (new String(this.convId + ">>>" + this.message));
+	}
 }
