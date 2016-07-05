@@ -17,8 +17,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class AppConfig extends WebMvcConfigurerAdapter {
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {        
-//        registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
-//        registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
+        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/").setCachePeriod(31556926);
+        registry.addResourceHandler("/img/**").addResourceLocations("/resources/images/").setCachePeriod(31556926);
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/").setCachePeriod(31556926);
     }
 	

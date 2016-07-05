@@ -8,12 +8,12 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import ksh.main.ct.dao.MessageDao;
 import ksh.main.models.ct.Message;
+import ksh.main.models.ct.MessageAbridged;
 import messages.MessageFromClient;
 import messages.MessageFromServer;
 
 @Controller
-public class ResponseWebSocketController {
-	
+public class ResponseWebSocketController {	
 
 	@Autowired private SimpMessagingTemplate template;
 	
@@ -28,29 +28,17 @@ public class ResponseWebSocketController {
     		messageDao.saveMessage(new Message(message.getConversationId(), message.getMessage(), System.currentTimeMillis()));
     	}
     	else if(message.getMessageType().equals("requestResponses")){
-    		if(message.getMessage().equals("-1")){
-    			ArrayList<Message> asd = messageDao.getMessagesForConverationId(message.getConversationId());
-    			for(int i=0 ; i<asd.size() ; i++){
-    				System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>");
-    				System.out.println(asd.get(i).toString());
-    				System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>");
-    			}    				
+    		long lastMessageReceived = Long.parseLong(message.getMessage());
+    		ArrayList<Message> allMessagesToBeSent = messageDao.getMessagesForConverationId(message.getConversationId());
+    		allMessagesToBeSent.removeIf(x -> (x.getTimestamp() <= lastMessageReceived));
+    		if(allMessagesToBeSent.size() > 0){
+    			ArrayList<MessageAbridged> allAbridgedMessagesToBeSent = new ArrayList<MessageAbridged>();
+    			for(int i=0 ; i<allMessagesToBeSent.size() ; i++){
+    				Message current = allMessagesToBeSent.get(i);
+    				allAbridgedMessagesToBeSent.add(new MessageAbridged(current.getMessage(), current.getTimestamp()));
+    			}
+    			this.template.convertAndSend("/ct/responses", new MessageFromServer(allAbridgedMessagesToBeSent));
     		}
-    	}
-    	String[] messages = {"message1","message2","message3","message4","message5"};
-    	for(int i=0 ; i<messages.length ; i++){
-    		Thread.sleep(3000); // simulated delay
-    		this.template.convertAndSend("/ct/responses", new MessageFromServer("Hello, " + messages[i] + "!"));
-    	}        
+    	}    
     }
-    
-//    @MessageMapping("/responseStream")
-//    public void greeting2(AddResponse message) throws Exception {
-//    	System.out.println(">>>>>In reponse");
-//    	String[] messages = {"message1","message2","message3","message4","message5"};
-//    	for(int i=0 ; i<messages.length ; i++){
-//    		Thread.sleep(3000); // simulated delay
-//    		this.template.convertAndSend("/topic/greetings", new MessageFromServer("Hello, " + messages[i] + "!"));
-//    	}        
-//    }
 }

@@ -3,11 +3,12 @@ function sendquestionOrTopic() {
 		type : "GET",		
 		url : "/ct/start-new-conversation",
 		data : "topic=" +  encodeURIComponent(document.getElementById('questionOrTopic').value),		
-		success : function(id) {			
-			console.log(id);
+		success : function(id) {	
+			$(".question-container").slideUp({duration: 500});
+			$(".spinner-container").slideDown({duration: 500});
 			setTimeout(function(){ 
 				window.location.href = "/ct/responses?conv_id=" + id;
-				}, 1500);
+				}, 2500);
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);

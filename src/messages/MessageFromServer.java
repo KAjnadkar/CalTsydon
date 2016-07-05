@@ -1,18 +1,22 @@
 package messages;
 
+import java.util.ArrayList;
+
+import ksh.main.models.ct.Message;
+import ksh.main.models.ct.MessageAbridged;
+
 public class MessageFromServer {
-	private String greeting;
+	private ArrayList<MessageAbridged> messages;
 	
-	public String getGreeting() {
-		return greeting;
+	public MessageFromServer(ArrayList<MessageAbridged> messages){
+		this.messages = messages;
 	}
 
-	public void setGreeting(String greeting) {
-		this.greeting = greeting;
+	public ArrayList<MessageAbridged> getMessages() {
+		return messages;
 	}
 
-	public MessageFromServer(String g) {
-		this.greeting = g;
+	public void setMessages(ArrayList<MessageAbridged> messages) {
+		this.messages = messages;
 	}
-	
 }

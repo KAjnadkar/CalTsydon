@@ -1,0 +1,58 @@
+body{
+	background-color: #C4F5FF;
+	width: 60%;
+	margin-left: 20%;	
+}
+
+.container-main{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-top: 25%;
+	background-color: #85D3FF;
+	text-align: center;
+}
+
+.question-label, .question-text, .question-send{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.question-label, .spinner-label{
+   font-size: 1.5em;
+   color: #004368;
+   font-family: "Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;
+}
+
+.question-text{
+	font-family: "Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;
+	font-size: 1.5em;
+    background: #C4F5FF; 
+    color: #333; 
+    border: 1px solid #A4A4A4; 
+    padding: 4px 8px 4px 4px;
+    line-height: 1; 
+    width: 275px; 
+    height:25px; 
+}
+
+.question-send {
+  border: none;
+  border-radius: 0px;
+  font-family: "Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;
+  color: #ffffff;
+  font-size: 20px;
+  background: #3498db;
+  padding: 10px 15px 10px 15px;  
+}
+
+.question-send:hover {
+  background: #3cb0fd;  
+}
+
+.oscar-wilde{
+	text-align: center;
+	font-family: "Arial Black","Arial Bold",Gadget,sans-serif;
+	font-size: 1em;
+	margin-top: 30%;
+	color: #004368;
+}

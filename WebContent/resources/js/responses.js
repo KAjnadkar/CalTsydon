@@ -1,3 +1,9 @@
+var lastResponseReceived = "-1";
+var stompClient = null;
+var pingEverySecs = 30000;
+var runPingServerLoop = true;
+
+
 function sendResponse() {
     var response = document.getElementById('response').value;
     var messageToServer = {
@@ -6,9 +12,8 @@ function sendResponse() {
     	conversationId: gup("conv_id", window.location.href)
     };
     stompClient.send("/ct/responseStream", {}, JSON.stringify(messageToServer));
+    document.getElementById('response').value = "";
 }
-
-var lastResponseReceived = "-1";
 
 function pingServer(){
 	var messageToServer = {
@@ -16,12 +21,8 @@ function pingServer(){
 	  	message: lastResponseReceived,
 	  	conversationId: gup("conv_id", window.location.href)
 	};
-	stompClient.send("/ct/responseStream", {}, JSON.stringify(messageToServer));
-	console.log("!!!!!!!!!!!!!!!!!!!!!!!");
+	stompClient.send("/ct/responseStream", {}, JSON.stringify(messageToServer));	
 }
-
-var stompClient = null;
-
 
 function connect() {
 	setTimeout(function(){		
@@ -29,13 +30,21 @@ function connect() {
 	    stompClient = Stomp.over(socket);
 	    stompClient.connect({}, function(frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient.subscribe('/ct/responses', function(greeting){
-	        	console.log(">>>>>>>>>>>>>>>>>>>");
-	        	console.log(greeting);
-	            showGreeting(JSON.parse(greeting.body).greeting);
+	        stompClient.subscribe('/ct/responses', function(messageFromServer){	        	
+	        	var messages = JSON.parse(messageFromServer.body).messages;
+	        	var conversationMainDiv = document.getElementById("conversation-main");
+	        	messages.map(function(message){	        		
+	        		var newMessage = document.createElement("div");
+	        		newMessage.innerHTML = message.message;
+	        		conversationMainDiv.appendChild(newMessage);
+	        	});
+	        	lastResponseReceived = messages[messages.length - 1].timestamp.toString(); 
+//	        	console.log(messages);
+//	        	console.log(lastResponseReceived);
+//	            showGreeting(JSON.parse(greeting.body).greeting);
 	        });
 	    });		
-	}, 1500);
+	}, 1000);
 	
 	pingServerLoop();
 }
@@ -59,8 +68,17 @@ function gup( name, url ) {
 
 function pingServerLoop(){
 	setTimeout(function(){
-		pingServer();
-		pingServerLoop();
-	}, 8000);
+		if(runPingServerLoop){
+			pingServer();
+			pingServerLoop();
+		}
+	}, pingEverySecs);
 }
-  
+
+function disconnect() {
+    if (stompClient != null) {
+        stompClient.disconnect();
+    }        
+    runPingServerLoop = false;
+    console.log("Disconnected");
+}  
