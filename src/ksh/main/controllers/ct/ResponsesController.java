@@ -20,8 +20,8 @@ import ksh.main.models.ct.Message;
 public class ResponsesController {
 	
 	@RequestMapping("/ct/responses")	
-	public ModelAndView goToResponses(@RequestParam("conv_id") String id) {		
-		String message = new java.util.Date().toGMTString();
-		return new ModelAndView("/ct/responses", "time", message);
+	public ModelAndView goToResponses(@RequestParam("conv_id") String id) {	
+		
+		return new ModelAndView("/ct/responses");
 	}
 }

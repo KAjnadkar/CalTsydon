@@ -2,10 +2,12 @@ package ksh.main.models.ct;
 
 public class MessageAbridged {
 	String message;
+	String userName;
 	Long timestamp;
 	
-	public MessageAbridged(String message, long timestamp){
+	public MessageAbridged(String message, String userName, long timestamp){
 		this.message = message;
+		this.userName = userName;
 		this.timestamp = timestamp;
 	}
 	
@@ -21,4 +23,10 @@ public class MessageAbridged {
 	public void setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}	
 }

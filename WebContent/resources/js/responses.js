@@ -1,18 +1,20 @@
 var lastResponseReceived = "-1";
 var stompClient = null;
-var pingEverySecs = 30000;
+var pingEverySecs = 8000;
 var runPingServerLoop = true;
+var clientUserName = "";
 
 
 function sendResponse() {
-    var response = document.getElementById('response').value;
+    var response = document.getElementById('my-response').value;
     var messageToServer = {
     	messageType: "clientResponse",
     	message: response,
+    	userName: clientUserName,
     	conversationId: gup("conv_id", window.location.href)
     };
     stompClient.send("/ct/responseStream", {}, JSON.stringify(messageToServer));
-    document.getElementById('response').value = "";
+    document.getElementById('my-response').value = "";
 }
 
 function pingServer(){
@@ -31,21 +33,42 @@ function connect() {
 	    stompClient.connect({}, function(frame) {
 	        console.log('Connected: ' + frame);
 	        stompClient.subscribe('/ct/responses', function(messageFromServer){	        	
-	        	var messages = JSON.parse(messageFromServer.body).messages;
-	        	var conversationMainDiv = document.getElementById("conversation-main");
-	        	messages.map(function(message){	        		
-	        		var newMessage = document.createElement("div");
-	        		newMessage.innerHTML = message.message;
-	        		conversationMainDiv.appendChild(newMessage);
-	        	});
-	        	lastResponseReceived = messages[messages.length - 1].timestamp.toString(); 
-//	        	console.log(messages);
-//	        	console.log(lastResponseReceived);
-//	            showGreeting(JSON.parse(greeting.body).greeting);
+	        	var messageType = JSON.parse(messageFromServer.body).type;	        	
+	        	if(messageType === "userName"){	  
+	        		clientUserName = JSON.parse(messageFromServer.body).message;	        		
+	        	}
+	        	else{	        		
+		        	var messages = JSON.parse(messageFromServer.body).messages;
+		        	var conversationMainDiv = document.getElementById("conversation-main");
+		        	messages.map(function(message){	     
+		        		if(message.message.length != 0){
+			        		var newMessage = document.createElement("div");
+//			        		newMessage.innerHTML = message.message;
+			        		
+			        		var userNameSpan = document.createElement("span");
+			        		userNameSpan.innerHTML = message.userName;
+			        		$(userNameSpan).addClass("response-user-name");		        		
+			        		
+			        		var messageSpan = document.createElement("span");
+			        		messageSpan.innerHTML = message.message;
+			        		$(messageSpan).addClass("response-message");
+			        		
+			        		newMessage.appendChild(userNameSpan);
+			        		newMessage.appendChild(messageSpan);
+			        		
+			        		$(newMessage).addClass("response");
+			        		$(newMessage).css("display", "none");
+			        		conversationMainDiv.appendChild(newMessage);
+			        		$(newMessage).show("highlight", 1500);
+		        		}
+		        	});
+		        	lastResponseReceived = messages[messages.length - 1].timestamp.toString();	        		
+	        	}	        	
 	        });
 	    });		
 	}, 1000);
 	
+	requestUserName();
 	pingServerLoop();
 }
 
@@ -64,6 +87,17 @@ function gup( name, url ) {
     var regex = new RegExp( regexS );
     var results = regex.exec( url );
     return results == null ? null : results[1];
+}
+
+function requestUserName(){
+	setTimeout(function(){
+		var messageToServer = {
+			 	messageType: "requestUserName",
+			  	message: lastResponseReceived,
+			  	conversationId: gup("conv_id", window.location.href)
+			};
+			stompClient.send("/ct/responseStream", {}, JSON.stringify(messageToServer));
+	}, 3500);
 }
 
 function pingServerLoop(){

@@ -19,16 +19,20 @@ public class Message {
 	
 	Long timestamp;
 	
-	public Message(){
+	String userName;
+	
+	public Message(){		
 		this.convId = "";
 		this.message = "";
 		this.timestamp = -1L;
+		this.userName = "";
 	}
 
-	public Message(String conversationId, String message, Long timestamp) {
+	public Message(String conversationId, String message, String userName, Long timestamp) {
 		this.convId = conversationId;		
 		this.message = message;
 		this.timestamp = timestamp;		
+		this.userName = userName;
 	}
 		
 	public String getConv_id() {
@@ -54,6 +58,14 @@ public class Message {
 		this.timestamp = timestamp;
 	}	
 	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public String toString(){
 		return (new String(this.convId + ">>>" + this.message));
 	}

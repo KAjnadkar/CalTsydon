@@ -36,17 +36,17 @@ body{
 }
 
 .question-send {
-  border: none;
-  border-radius: 0px;
-  font-family: "Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;
-  color: #ffffff;
-  font-size: 20px;
-  background: #3498db;
-  padding: 10px 15px 10px 15px;  
+	border: none;
+	border-radius: 10px;
+	font-family: "Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;
+	color: #ffffff;
+	font-size: 20px;
+	background: #3498db;
+	padding: 10px 15px 10px 15px;  
 }
 
 .question-send:hover {
-  background: #3cb0fd;  
+	background: #3cb0fd;  
 }
 
 .oscar-wilde{

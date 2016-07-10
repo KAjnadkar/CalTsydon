@@ -1,6 +1,8 @@
 package ksh.main.controllers.ct;
 
 import java.util.ArrayList;
+import java.util.Random;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -25,7 +27,11 @@ public class ResponseWebSocketController {
     	System.out.println(message.toString());
     	
     	if(message.getMessageType().equals("clientResponse")){
-    		messageDao.saveMessage(new Message(message.getConversationId(), message.getMessage(), System.currentTimeMillis()));
+    		messageDao.saveMessage(new Message(message.getConversationId(), message.getMessage(), message.getUserName(), System.currentTimeMillis()));
+    	}
+    	else if(message.getMessageType().equals("requestUserName")){    		  		
+    		String name = "John" + "-" + new Random().nextInt();    		
+    		this.template.convertAndSend("/ct/responses", new MessageFromServer("userName", new ArrayList(), name));
     	}
     	else if(message.getMessageType().equals("requestResponses")){
     		long lastMessageReceived = Long.parseLong(message.getMessage());
@@ -35,9 +41,9 @@ public class ResponseWebSocketController {
     			ArrayList<MessageAbridged> allAbridgedMessagesToBeSent = new ArrayList<MessageAbridged>();
     			for(int i=0 ; i<allMessagesToBeSent.size() ; i++){
     				Message current = allMessagesToBeSent.get(i);
-    				allAbridgedMessagesToBeSent.add(new MessageAbridged(current.getMessage(), current.getTimestamp()));
+    				allAbridgedMessagesToBeSent.add(new MessageAbridged(current.getMessage(), current.getUserName(), current.getTimestamp()));
     			}
-    			this.template.convertAndSend("/ct/responses", new MessageFromServer(allAbridgedMessagesToBeSent));
+    			this.template.convertAndSend("/ct/responses", new MessageFromServer("responses", allAbridgedMessagesToBeSent, ""));
     		}
     	}    
     }

@@ -3,26 +3,27 @@
 <html>
 <head>
 	<spring:url value="/js/responses.js" var="responsesJs" />
+	<spring:url value="/css/ct-responses.css" var="responsesCss" />
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Honest Chat - Conversation</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>	
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 	<script src="${responsesJs}"></script>
+	<link type="text/css" rel="stylesheet" href="${responsesCss}" />
 </head>
-<body onload="connect()">
-	<h>Scarlett</h1>
-	<p>Time on the server is ${time}</p>
-	
+<body onload="connect()">	
 	<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
     Javascript and reload this page!</h2></noscript>
-<div>
+	
     <div id="conversation-div">
     	<div id="conversation-main"></div>
-        <label>Your response</label><input type="text" id="response" />
-        <button id="sendResponse" onclick="sendResponse();">Send</button>        
+    	<br/>
+        <input type="text" id="my-response" />
+        <button id="send-response" onclick="sendResponse();">Send Response</button>        
     </div>
-</div>
+
 </body>
 </html>
