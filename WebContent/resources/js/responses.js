@@ -3,7 +3,7 @@ var stompClient = null;
 var pingEverySecs = 8000;
 var runPingServerLoop = true;
 var clientUserName = "";
-
+var months = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
 
 function sendResponse() {
     var response = document.getElementById('my-response').value;
@@ -37,13 +37,20 @@ function connect() {
 	        	if(messageType === "userName"){	  
 	        		clientUserName = JSON.parse(messageFromServer.body).message;	        		
 	        	}
-	        	else{	        		
-		        	var messages = JSON.parse(messageFromServer.body).messages;
-		        	var conversationMainDiv = document.getElementById("conversation-main");
+	        	else{	        	
+	        		var conversationMainDiv = document.getElementById("conversation-main");
+	        		var seperator = document.createElement("div");
+	        		var date = new Date();
+	        		var marker = months[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+	        		seperator.innerHTML = marker;
+	        		$(seperator).addClass("response-seq-seperator");
+	        		conversationMainDiv.appendChild(seperator);
+	        		$(conversationMainDiv).append("<hr/>");
+	        		
+		        	var messages = JSON.parse(messageFromServer.body).messages;		        	
 		        	messages.map(function(message){	     
 		        		if(message.message.length != 0){
 			        		var newMessage = document.createElement("div");
-//			        		newMessage.innerHTML = message.message;
 			        		
 			        		var userNameSpan = document.createElement("span");
 			        		userNameSpan.innerHTML = message.userName;

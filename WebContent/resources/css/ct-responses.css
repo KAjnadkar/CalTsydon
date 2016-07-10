@@ -39,6 +39,11 @@ html, body{
   	float: right;  	
 }
 
+.response-seq-seperator{
+	margin: 20px 10px 10px 10px;
+	color: gray;
+}
+
 #my-response{
 	font-family: "Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;
 	font-size: 1.5em;
@@ -57,5 +62,9 @@ html, body{
   	color: #ffffff;
   	font-size: 20px;
   	background: #3498db;
-  	padding: 10px 15px 10px 15px;  
+  	padding: 10px 15px 0px 15px;  
+}
+
+hr{
+	border: 1px solid forestgreen;
 }
