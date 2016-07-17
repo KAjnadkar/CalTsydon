@@ -53,6 +53,9 @@ function connect() {
 	        		$("#topic").slideDown(1000);
 	        		$("#conversation-div").slideDown(1000);
 	        	}
+	        	else if(messageType === "404"){	  
+	        		window.location.href = "/ct/404";
+	        	}
 	        	else{	        	
 	        		var conversationMainDiv = document.getElementById("conversation-main");
 	        		var seperator = document.createElement("div");

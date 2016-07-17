@@ -28,32 +28,34 @@ public class ResponseWebSocketController {
 	private ConversationDao conversationDao;
     
 	@MessageMapping("/responseStream")
-    public void greeting1(MessageFromClient message) throws Exception {
-    	System.out.println(message.toString());
-    	
-    	if(message.getMessageType().equals("clientResponse")){
-    		messageDao.saveMessage(new Message(message.getConversationId(), message.getMessage(), message.getUserName(), System.currentTimeMillis()));
-    	}
-    	else if(message.getMessageType().equals("requestUserName")){    		  		
-    		String name = "John" + "-" + new Random().nextInt();    		
-    		this.template.convertAndSend("/ct/responses", new MessageFromServer("userName", new ArrayList(), name));
-    	}
-    	else if(message.getMessageType().equals("requestConversatioTopic")){    		  		
-    		String topic = conversationDao.getConversaionTopic(message.getConversationId());
-    		this.template.convertAndSend("/ct/responses", new MessageFromServer("requestConversatioTopic", new ArrayList(), topic));
-    	}
-    	else if(message.getMessageType().equals("requestResponses")){
-    		long lastMessageReceived = Long.parseLong(message.getMessage());
-    		ArrayList<Message> allMessagesToBeSent = messageDao.getMessagesForConverationId(message.getConversationId());
-    		allMessagesToBeSent.removeIf(x -> (x.getTimestamp() <= lastMessageReceived));
-    		if(allMessagesToBeSent.size() > 0){
-    			ArrayList<MessageAbridged> allAbridgedMessagesToBeSent = new ArrayList<MessageAbridged>();
-    			for(int i=0 ; i<allMessagesToBeSent.size() ; i++){
-    				Message current = allMessagesToBeSent.get(i);
-    				allAbridgedMessagesToBeSent.add(new MessageAbridged(current.getMessage(), current.getUserName(), current.getTimestamp()));
-    			}
-    			this.template.convertAndSend("/ct/responses", new MessageFromServer("responses", allAbridgedMessagesToBeSent, ""));
-    		}
-    	}    
+    public void greeting1(MessageFromClient message) throws Exception {   
+		if(conversationDao.doesConversationExist(message.getConversationId()) != null){
+	    	if(message.getMessageType().equals("clientResponse")){
+	    		messageDao.saveMessage(new Message(message.getConversationId(), message.getMessage(), message.getUserName(), System.currentTimeMillis()));
+	    	}
+	    	else if(message.getMessageType().equals("requestUserName")){    		  		
+	    		String name = "John" + "-" + new Random().nextInt();    		
+	    		this.template.convertAndSend("/ct/responses", new MessageFromServer("userName", new ArrayList(), name));
+	    	}
+	    	else if(message.getMessageType().equals("requestConversatioTopic")){    		  		
+	    		String topic = conversationDao.getConversaionTopic(message.getConversationId());
+	    		this.template.convertAndSend("/ct/responses", new MessageFromServer("requestConversatioTopic", new ArrayList(), topic));
+	    	}
+	    	else if(message.getMessageType().equals("requestResponses")){
+	    		long lastMessageReceived = Long.parseLong(message.getMessage());
+	    		ArrayList<Message> allMessagesToBeSent = messageDao.getMessagesForConverationId(message.getConversationId());
+	    		allMessagesToBeSent.removeIf(x -> (x.getTimestamp() <= lastMessageReceived));
+	    		if(allMessagesToBeSent.size() > 0){
+	    			ArrayList<MessageAbridged> allAbridgedMessagesToBeSent = new ArrayList<MessageAbridged>();
+	    			for(int i=0 ; i<allMessagesToBeSent.size() ; i++){
+	    				Message current = allMessagesToBeSent.get(i);
+	    				allAbridgedMessagesToBeSent.add(new MessageAbridged(current.getMessage(), current.getUserName(), current.getTimestamp()));
+	    			}
+	    			this.template.convertAndSend("/ct/responses", new MessageFromServer("responses", allAbridgedMessagesToBeSent, ""));
+	    		}
+	    	}
+		}
+		else
+			this.template.convertAndSend("/ct/responses", new MessageFromServer("404", new ArrayList(), "404"));
     }
 }

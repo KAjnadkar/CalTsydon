@@ -42,4 +42,11 @@ public class ConversationDaoImpl implements ConversationDao {
 		return topic;
 	}
 
+	@Override
+	@Transactional
+	public Conversation doesConversationExist(String id) {
+		Conversation conversation = (Conversation) sessionFactory.getCurrentSession().get(Conversation.class, id);
+		return conversation;
+	}
+
 }
