@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+
+import ksh.main.ct.dao.ConversationDao;
 import ksh.main.ct.dao.MessageDao;
 import ksh.main.models.ct.Message;
 import ksh.main.models.ct.MessageAbridged;
@@ -21,6 +23,9 @@ public class ResponseWebSocketController {
 	
 	@Autowired
 	private MessageDao messageDao;
+	
+	@Autowired
+	private ConversationDao conversationDao;
     
 	@MessageMapping("/responseStream")
     public void greeting1(MessageFromClient message) throws Exception {
@@ -32,6 +37,10 @@ public class ResponseWebSocketController {
     	else if(message.getMessageType().equals("requestUserName")){    		  		
     		String name = "John" + "-" + new Random().nextInt();    		
     		this.template.convertAndSend("/ct/responses", new MessageFromServer("userName", new ArrayList(), name));
+    	}
+    	else if(message.getMessageType().equals("requestConversatioTopic")){    		  		
+    		String topic = conversationDao.getConversaionTopic(message.getConversationId());
+    		this.template.convertAndSend("/ct/responses", new MessageFromServer("requestConversatioTopic", new ArrayList(), topic));
     	}
     	else if(message.getMessageType().equals("requestResponses")){
     		long lastMessageReceived = Long.parseLong(message.getMessage());

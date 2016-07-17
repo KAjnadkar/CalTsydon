@@ -6,13 +6,22 @@ html, body{
 }
 
 #conversation-div{
-	height: 100%;
+	height: 70%;
+	background-color: #85D3FF;
 }
 
 #conversation-main{	
-	height: 65%;
-	border: 1px solid red;
+	height: 90%;	
 	overflow: scroll;
+	margin-top: 3%;
+}
+
+#username-div{
+	text-align: right;	
+	font-family: "Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;  	
+  	font-size: 1.2em;
+   	color: #004368;
+   	background-color: #85D3FF;
 }
 
 .response{
@@ -32,8 +41,7 @@ html, body{
   	margin-right: 2px;  	
 }
 
-.response-message{
-	
+.response-message{	
 	font-family: "Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;  	
   	font-size: 20px;
   	float: right;  	
@@ -52,7 +60,7 @@ html, body{
     border: 1px solid #A4A4A4; 
     padding: 10px 15px 10px 15px;
     line-height: 1; 
-    width: 70%; 
+    width: 78%; 
     height:25px; 
 }
 
@@ -62,7 +70,27 @@ html, body{
   	color: #ffffff;
   	font-size: 20px;
   	background: #3498db;
-  	padding: 10px 15px 0px 15px;  
+  	padding: 10px 15px 10px 15px;  
+}
+
+#topic{
+	text-align: center;	
+	font-family: "Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;  	
+  	font-size: 1.5em;
+   	color: #004368;
+   	background-color: #85D3FF;
+}
+
+#topic-div{
+	margin-top: 9%;
+}
+
+#topic-spinner{
+	text-align: center;
+	font-family: "Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;  	
+  	font-size: 1.5em;
+   	color: #004368;
+   	background-color: #85D3FF;
 }
 
 hr{

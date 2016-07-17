@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import ksh.main.models.ct.Conversation;
 import ksh.main.models.ct.Message;
 
 public class MessageDaoImpl implements MessageDao {
@@ -33,5 +34,4 @@ public class MessageDaoImpl implements MessageDao {
 		ArrayList<Message> messages = (ArrayList<Message>)sessionFactory.getCurrentSession().createQuery("FROM Message m WHERE m.convId = '" + id + "'").list();
 		return messages;
 	}
-
 }

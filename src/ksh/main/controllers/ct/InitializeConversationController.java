@@ -19,10 +19,7 @@ import ksh.main.models.ct.Message;
 public class InitializeConversationController {
 
 	@Autowired
-	private ConversationDao conversationDao;
-	
-	@Autowired
-	private MessageDao messageDao;
+	private ConversationDao conversationDao;	
 	
 	@RequestMapping(value = "/ct/start-new-conversation",  method = RequestMethod.GET)	
 	public @ResponseBody String goToResponses(@RequestParam("topic") String topic) {			    	

@@ -1,8 +1,9 @@
 var lastResponseReceived = "-1";
 var stompClient = null;
-var pingEverySecs = 8000;
+var pingEverySecs = 30000;
 var runPingServerLoop = true;
-var clientUserName = "";
+var clientUserName = undefined;
+var topic = undefined;
 var months = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
 
 function sendResponse() {
@@ -35,7 +36,22 @@ function connect() {
 	        stompClient.subscribe('/ct/responses', function(messageFromServer){	        	
 	        	var messageType = JSON.parse(messageFromServer.body).type;	        	
 	        	if(messageType === "userName"){	  
-	        		clientUserName = JSON.parse(messageFromServer.body).message;	        		
+	        		clientUserName = JSON.parse(messageFromServer.body).message;
+	        		var nameSpan = document.createElement("span");
+	        		nameSpan.innerHTML = "You have joined this conversation as " + clientUserName;
+	        		var userNameDiv = document.getElementById("username-div");
+	        		userNameDiv.appendChild(nameSpan);
+	        		$("#username-div").slideDown(1000);
+	        	}
+	        	else if(messageType === "requestConversatioTopic"){	  
+	        		topic = JSON.parse(messageFromServer.body).message;	   
+	        		var topicSpan = document.createElement("span");
+	        		topicSpan.innerHTML = topic;
+	        		$("#topic-spinner").slideUp();
+	        		var topicDiv = document.getElementById("topic");
+	        		topicDiv.appendChild(topicSpan);
+	        		$("#topic").slideDown(1000);
+	        		$("#conversation-div").slideDown(1000);
 	        	}
 	        	else{	        	
 	        		var conversationMainDiv = document.getElementById("conversation-main");
@@ -73,9 +89,10 @@ function connect() {
 	        	}	        	
 	        });
 	    });		
-	}, 1000);
+	}, 500);
 	
-	requestUserName();
+	requestConversatioTopic();
+	requestUserName();	
 	pingServerLoop();
 }
 
@@ -104,7 +121,18 @@ function requestUserName(){
 			  	conversationId: gup("conv_id", window.location.href)
 			};
 			stompClient.send("/ct/responseStream", {}, JSON.stringify(messageToServer));
-	}, 3500);
+	}, 2500);
+}
+
+function requestConversatioTopic(){
+	setTimeout(function(){
+		var messageToServer = {
+			 	messageType: "requestConversatioTopic",
+			  	message: lastResponseReceived,
+			  	conversationId: gup("conv_id", window.location.href)
+			};
+			stompClient.send("/ct/responseStream", {}, JSON.stringify(messageToServer));
+	}, 2000);
 }
 
 function pingServerLoop(){

@@ -35,4 +35,11 @@ public class ConversationDaoImpl implements ConversationDao {
 		return new Conversation("afasfasfsa", "afsafafasfasfsafsaf");		
 	}
 
+	@Override
+	@Transactional
+	public String getConversaionTopic(String id) {
+		String topic = (String) sessionFactory.getCurrentSession().get(Conversation.class, id).getTopic();
+		return topic;
+	}
+
 }

@@ -19,6 +19,12 @@ public class Conversation {
 	
 	String accessKey;
 	
+	public Conversation(){
+		this.id = "";
+		this.topic = "";
+		this.accessKey = "";
+	}
+	
 	public Conversation(String id, String topic) {
 		this.id = id;
 		this.topic = topic;

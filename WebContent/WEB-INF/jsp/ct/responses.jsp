@@ -17,8 +17,19 @@
 <body onload="connect()">	
 	<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
     Javascript and reload this page!</h2></noscript>
+    
+    <div id="topic-div">
+    	<div id="topic-spinner">
+    		<label class="spinner-label">Loading your chat...</label><br/>
+        	<img class="topic-spinner-spinner" id="loading" src="/img/loading.gif"/>
+    	</div>
+    	<div id="topic" style="display:none;">    		
+    	</div>
+    	<div id="username-div" style="display:none;">
+    	</div>
+    </div>    
 	
-    <div id="conversation-div">
+    <div id="conversation-div" style="display:none;">
     	<div id="conversation-main"></div>
     	<br/>
         <input type="text" id="my-response" />
