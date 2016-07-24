@@ -17,8 +17,20 @@
 <body onload="connect()">	
 	<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
     Javascript and reload this page!</h2></noscript>
-    
-    <div id="topic-div">
+
+	<div id="topbar-container">
+		<div class="topbar-logo">Candid Chat</div>
+		<div class="topbar-action-item"><a href="/ct/ct-home">Start A New Conversation</a></div>
+		<div class="topbar-action-item" onclick="copyLink()">Copy Link</div>
+		<div class="topbar-action-item"><a href="/ct/faq">FAQ</a></div>
+		<div class="topbar-action-item"><a href="/ct/contact">Contact</a></div>
+		<div class="topbar-action-item"><a href="/ct/blog">Blog</a></div>
+	</div>
+	
+	<div style="clear: both"></div>
+	<br/>
+
+	<div id="topic-div">
     	<div id="topic-spinner">
     		<label class="spinner-label">Loading your chat...</label><br/>
         	<img class="topic-spinner-spinner" id="loading" src="/img/loading.gif"/>

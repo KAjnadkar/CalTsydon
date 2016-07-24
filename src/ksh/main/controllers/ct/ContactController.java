@@ -5,11 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class FourOhFourController {
-	@RequestMapping("/ct/404")	
-	public ModelAndView goToFourOhFour() {	 
-		System.out.println("404");				
-		return new ModelAndView("/ct/404");
-	}	
-
+public class ContactController {
+	@RequestMapping("/ct/contact")	
+	public ModelAndView goToContact() {	
+		
+		return new ModelAndView("/ct/contact");
+	}
 }

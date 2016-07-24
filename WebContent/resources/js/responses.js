@@ -153,4 +153,8 @@ function disconnect() {
     }        
     runPingServerLoop = false;
     console.log("Disconnected");
-}  
+}
+
+function copyLink(){	
+	window.prompt("Copy to clipboard: Ctrl + C/Cmd + C and hit Enter", window.location.href);
+}

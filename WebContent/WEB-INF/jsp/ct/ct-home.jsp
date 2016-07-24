@@ -11,11 +11,23 @@
 	<title>Honest Chat - Home</title>	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
 	<script src="${mainJs}"></script>
+	<script src="/js/carousel.js"></script>
 	<link type="text/css" rel="stylesheet" href="${mainCss}" />
+	<link type="text/css" rel="stylesheet" href="/css/carousel.css" />	
 </head>
 <body>
 	<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
     Javascript and reload this page!</h2></noscript>
+	<div id="carousel-goes-here">
+<!-- 		<div class="carousel-container">
+			<ul class="carousel">
+				<li>one</li>
+				<li>two</li>
+				<li>three</li>
+				<li>four</li>
+			</ul>
+		</div> -->
+	</div>
 	<div class="container-main">
 		<div class="question-container">    
         	<label class="question-label">What is your question or topic of discussion?</label><br/>

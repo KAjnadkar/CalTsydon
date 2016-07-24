@@ -26,19 +26,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 @EnableTransactionManagement
 @ComponentScan({ "ksh.main.controllers", "ksh.main.ct.dao", "ksh.main.models.ct" })
 public class HibernateConfig {
- 
-//    @Autowired
-//    private Environment environment;
- 
-//    @Bean
-//    public LocalSessionFactoryBean sessionFactory() {
-//        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-//        sessionFactory.setDataSource(dataSource());
-//        sessionFactory.setPackagesToScan(new String[] { "ksh.main.controllers", "ksh.main.ct.dao", "ksh.main.models.ct" });
-//        sessionFactory.setHibernateProperties(hibernateProperties());
-//        return sessionFactory;
-//     }
-	
+
 	@Autowired
 	@Bean(name = "sessionFactory")
 	public SessionFactory getSessionFactory(DataSource dataSource) {
