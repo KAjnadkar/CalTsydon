@@ -16,9 +16,7 @@ import ksh.main.ct.dao.ConversationDao;
 import ksh.main.ct.dao.ConversationDaoImpl;
 import ksh.main.ct.dao.MessageDao;
 import ksh.main.ct.dao.MessageDaoImpl;
-import ksh.main.models.ct.Conversation;
 
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 
@@ -32,21 +30,29 @@ public class HibernateConfig {
 	public SessionFactory getSessionFactory(DataSource dataSource) {
 
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
-
-		sessionBuilder.addAnnotatedClasses(Conversation.class);
 		sessionBuilder.scanPackages("ksh.main.controllers", "ksh.main.ct.dao", "ksh.main.models.ct");
 		sessionBuilder.addProperties(hibernateProperties());
 
 		return sessionBuilder.buildSessionFactory();
 	}
      
+//    @Bean
+//    public DataSource dataSource() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//        dataSource.setUrl("jdbc:mysql://localhost:3306/ct");
+//        dataSource.setUsername("dev");
+//        dataSource.setPassword("root");
+//        return dataSource;
+//    }
+    
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/ct");
-        dataSource.setUsername("dev");
-        dataSource.setPassword("root");
+        dataSource.setUrl("jdbc:mysql://chat-honestly-rds-2.coyzbiu0d9ks.us-east-1.rds.amazonaws.com:3306/ct");
+        dataSource.setUsername("chathonestly");
+        dataSource.setPassword("rubmeharderplys");
         return dataSource;
     }
      
@@ -55,7 +61,7 @@ public class HibernateConfig {
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
-        properties.setProperty("hibernate.hbm2ddl.auto", "validate");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
         return properties;        
     }
      
