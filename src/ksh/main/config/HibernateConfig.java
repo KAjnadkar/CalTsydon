@@ -36,25 +36,25 @@ public class HibernateConfig {
 		return sessionBuilder.buildSessionFactory();
 	}
      
-//    @Bean
-//    public DataSource dataSource() {
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-//        dataSource.setUrl("jdbc:mysql://localhost:3306/ct");
-//        dataSource.setUsername("dev");
-//        dataSource.setPassword("root");
-//        return dataSource;
-//    }
-    
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://chat-honestly-rds-2.coyzbiu0d9ks.us-east-1.rds.amazonaws.com:3306/ct");
-        dataSource.setUsername("chathonestly");
-        dataSource.setPassword("rubmeharderplys");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/ct");
+        dataSource.setUsername("dev");
+        dataSource.setPassword("root");
         return dataSource;
     }
+    
+//    @Bean
+//    public DataSource dataSource() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//        dataSource.setUrl("jdbc:mysql://chat-honestly-rds-2.coyzbiu0d9ks.us-east-1.rds.amazonaws.com:3306/ct");
+//        dataSource.setUsername("chathonestly");
+//        dataSource.setPassword("rubmeharderplys");
+//        return dataSource;
+//    }
      
     private Properties hibernateProperties() {
         Properties properties = new Properties();

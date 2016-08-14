@@ -8,7 +8,7 @@
 	<meta name="_csrf" th:content="${_csrf.token}"/>
   	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Honest Chat - Home</title>	
+	<title>Chat Honestly - Home</title>	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
 	<script src="${mainJs}"></script>
 	<script src="/js/carousel.js"></script>
@@ -18,16 +18,6 @@
 <body>
 	<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
     Javascript and reload this page!</h2></noscript>
-	<div id="carousel-goes-here">
-<!-- 		<div class="carousel-container">
-			<ul class="carousel">
-				<li>one</li>
-				<li>two</li>
-				<li>three</li>
-				<li>four</li>
-			</ul>
-		</div> -->
-	</div>
 	<div class="container-main">
 		<div class="question-container">    
         	<label class="question-label">What is your question or topic of discussion?</label><br/>
@@ -38,6 +28,8 @@
         	<label class="spinner-label">Starting your conversation</label><br/>
         	<img class="spinner" id="loading" src="/img/loading.gif"/>
         </div>	        	    
+	</div>
+	<div id="carousel-goes-here">
 	</div>
 	<div class="oscar-wilde">
 		Man is least himself when he talks in his own person.<br/>

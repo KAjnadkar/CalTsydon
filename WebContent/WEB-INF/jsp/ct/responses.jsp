@@ -19,7 +19,7 @@
     Javascript and reload this page!</h2></noscript>
 
 	<div id="topbar-container">
-		<div class="topbar-logo">Candid Chat</div>
+		<div class="topbar-logo">Chat Honestly</div>
 		<div class="topbar-action-item"><a href="/ct/ct-home">Start A New Conversation</a></div>
 		<div class="topbar-action-item" onclick="copyLink()">Copy Link</div>
 		<div class="topbar-action-item"><a href="/ct/faq">FAQ</a></div>

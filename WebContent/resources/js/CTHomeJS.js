@@ -20,6 +20,6 @@ function sendquestionOrTopic() {
 	});
 }
 
-$(document).ready(function(){
+$(document).ready(function(){	
 	$("#carousel-goes-here").load("/static/carousel.html"); 
 });

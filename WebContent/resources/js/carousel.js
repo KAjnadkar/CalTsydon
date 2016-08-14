@@ -2,14 +2,14 @@ $(document).ready(function(){
 	setTimeout(function(){		
 		var carousel = $(".carousel");		
 		function slides() {
-			return carousel.find("li");
+			return carousel.find("span");
 		}		
 		slides().first().addClass('active');
 		slides().first().fadeIn(1000);		
 		moveCarousel();
 		function moveCarousel(){
 			var allSlides = slides();
-			var activeIndex = carousel.find("li" + '.active').index();
+			var activeIndex = carousel.find("span" + '.active').index();
 			$(allSlides[activeIndex]).fadeOut(1000);
 			$(allSlides[activeIndex]).removeClass('active');
 			if (allSlides.length == (activeIndex + 1))

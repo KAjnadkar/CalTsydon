@@ -1,12 +1,14 @@
 .carousel {
   margin: 10px 0;
-  width: 200px; /* Update to your slider width */
-  height: 100px; /* Update to your slider height */
+  /*width: 200px; /* Update to your slider width */
+  height: 50px; /* Update to your slider height */
   position: relative;
   overflow: hidden;
+  font-family: "Segoe UI",Frutiger,"Frutiger Linotype","Dejavu Sans","Helvetica Neue",Arial,sans-serif;
+  font-size: 18px;
 }
 
- .carousel li {
+ .carousel span {
   display: none;
   position: absolute; 
   top: 0; 
