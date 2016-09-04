@@ -33,6 +33,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-      registry.addViewController("/").setViewName("home");
+      registry.addViewController("/").setViewName("ct/ct-home");
+//      registry.addViewController("/visualize").setViewName("visualize");
     }
 }

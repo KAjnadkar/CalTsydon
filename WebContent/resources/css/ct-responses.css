@@ -14,8 +14,7 @@ html, body{
 	}
 	
 	#topbar-container{		  	
-  		font-size: 24px; 
-  		background-color: red;  		   		
+  		font-size: 24px;  				   		
 	}
 	
 	.topbar-action-item{
@@ -30,8 +29,8 @@ html, body{
 	}
 	
 	#topbar-container{		  	
-  		font-size: 20px;   		
-  		background-color: green;   		
+  		font-size: 20px;  		
+  			
 	}
 	
 	.topbar-action-item{

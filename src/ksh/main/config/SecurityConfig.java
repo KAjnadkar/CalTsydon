@@ -20,7 +20,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 	  http.authorizeRequests()
-		.antMatchers("/ct/**").access("hasRole('ROLE_USER')")		
+//		.antMatchers("/ct/**").access("hasRole('ROLE_USER')")		
+	  	.antMatchers("/dont/know/how/to/disable/spring/sec/**").access("hasRole('ROLE_USER')")		
 		.and().formLogin().loginPage("/login").failureUrl("/access-denied").successForwardUrl("/ct/ct-home")
 		.and().csrf();
 		
