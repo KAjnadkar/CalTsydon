@@ -25,6 +25,7 @@ function play(){
 	document.getElementById('music').play();
 	
 	audio = document.getElementById('music');
+	audio.volume = 0.2;
 	audioSrc = audioCtx.createMediaElementSource(audio);	
 	analyser = audioCtx.createAnalyser();
 	audioSrc.connect(analyser);
@@ -125,7 +126,7 @@ function initWebgl(){
 		analyser.getByteFrequencyData(dataArray);	
 
 		vertices = [];
-		for(j = 0, i = 0 ; i <= 60 ; i++){
+		for(j = 0, i = 0 ; i <= bufferLength ; i++){
 			if(i % 2 == 0){
 				vertices.push(j*0.01); //x
 				vertices.push(0.0); //y
@@ -149,7 +150,7 @@ function initWebgl(){
 		
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);		
-		gl.drawArrays(gl.LINES, 0, 60);
+		gl.drawArrays(gl.LINES, 0, bufferLength/2);
 		
 		requestAnimationFrame(drawLoop);	
 	};
