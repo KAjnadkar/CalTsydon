@@ -25,7 +25,7 @@ function play(){
 	document.getElementById('music').play();
 	
 	audio = document.getElementById('music');
-	audio.volume = 0.2;
+	audio.volume = 0.06;
 	audioSrc = audioCtx.createMediaElementSource(audio);	
 	analyser = audioCtx.createAnalyser();
 	audioSrc.connect(analyser);
@@ -83,20 +83,20 @@ function initWebgl(){
 		return;
 	}
 	
-	var vertices = [];
+	var equalizerVertices = [];
 	
 	for(j = 0, i = bufferLength - 1 ; i >= 50 ; i--, j++){
-		vertices.push(j*(2/bufferLength)); //x
-		vertices.push(0.0); //y
-		vertices.push(0.0); //z
-		vertices.push(0.0); //r
-		vertices.push(0.0); //g
-		vertices.push(0.0); //b
+		equalizerVertices.push(j*(2/bufferLength)); //x
+		equalizerVertices.push(0.0); //y
+		equalizerVertices.push(0.0); //z
+		equalizerVertices.push(0.0); //r
+		equalizerVertices.push(0.0); //g
+		equalizerVertices.push(0.0); //b
 	}
 	
 	var vertixBufferObject = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, vertixBufferObject);
-	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.DYNAMIC_DRAW);	
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(equalizerVertices), gl.DYNAMIC_DRAW);	
 	
 	var positionAttributeLocation = gl.getAttribLocation(program, "vertPosition");
 	var colorAttributeLocation = gl.getAttribLocation(program, "vertColor");
@@ -116,41 +116,97 @@ function initWebgl(){
 	var viewMat = new Float32Array(16);
 	mat4.perspective(projMat, glMatrix.toRadian(45), canvas.width/canvas.height, 0.1, 1000.0);
 	mat4.identity(worldMat);
-	mat4.lookAt(viewMat, [0, 0, -3], [0, 0, 0], [0, 1, 0]);	
+	mat4.lookAt(viewMat, [512, 0, 999], [512, 0, 0], [0, 1, 0]);	
 	
 	gl.uniformMatrix4fv(worldMatUniformLocation, gl.FALSE, worldMat);
 	gl.uniformMatrix4fv(viewMatUniformLocation, gl.FALSE, viewMat);
 	gl.uniformMatrix4fv(projMatUniformLocation, gl.FALSE, projMat);
-		
+			
 	var drawLoop = function() {	
 		analyser.getByteFrequencyData(dataArray);	
 
-		vertices = [];
-		for(j = 0, i = 0 ; i <= bufferLength ; i++){
-			if(i % 2 == 0){
-				vertices.push(j*0.01); //x
-				vertices.push(0.0); //y
-				vertices.push(0.0); //z
-				vertices.push(1.0); //r
-				vertices.push(0.0); //g
-				vertices.push(0.0); //b
-			}
-			else{
-				vertices.push(j*0.01); //x
-				vertices.push(dataArray[i]/1000); //y
-				vertices.push(0.0); //z
-				vertices.push(1.0); //r
-				vertices.push(0.0); //g
-				vertices.push(0.0); //b
-				j = j+1;
-			}
-		}	
+		equalizerVertices = [];
 		
-		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.DYNAMIC_DRAW);
+		equalizerVertices.push(0.0); //x
+		equalizerVertices.push(0.0); //y
+		equalizerVertices.push(0.0); //z
+		equalizerVertices.push(1.0); //r
+		equalizerVertices.push(0.0); //g
+		equalizerVertices.push(0.0); //b
+		
+		equalizerVertices.push(0.0); //x
+		equalizerVertices.push(100.0); //y
+		equalizerVertices.push(0.0); //z
+		equalizerVertices.push(1.0); //r
+		equalizerVertices.push(0.0); //g
+		equalizerVertices.push(0.0); //b
+		
+		equalizerVertices.push(500.0); //x
+		equalizerVertices.push(0.0); //y
+		equalizerVertices.push(0.0); //z
+		equalizerVertices.push(0.0); //r
+		equalizerVertices.push(1.0); //g
+		equalizerVertices.push(0.0); //b
+		
+		equalizerVertices.push(500.0); //x
+		equalizerVertices.push(100.0); //y
+		equalizerVertices.push(0.0); //z
+		equalizerVertices.push(0.0); //r
+		equalizerVertices.push(1.0); //g
+		equalizerVertices.push(0.0); //b
+		
+		equalizerVertices.push(999.0); //x
+		equalizerVertices.push(0.0); //y
+		equalizerVertices.push(0.0); //z
+		equalizerVertices.push(0.0); //r
+		equalizerVertices.push(0.0); //g
+		equalizerVertices.push(1.0); //b
+		
+		equalizerVertices.push(999.0); //x
+		equalizerVertices.push(100.0); //y
+		equalizerVertices.push(0.0); //z
+		equalizerVertices.push(0.0); //r
+		equalizerVertices.push(0.0); //g
+		equalizerVertices.push(1.0); //b
+		
+		for(j = 0, i = 0 ; i <= bufferLength ; i++, j = j + 2){
+
+				equalizerVertices.push(j); //x
+				equalizerVertices.push(0.0); //y
+				equalizerVertices.push(0.0); //z
+				equalizerVertices.push(1.0); //r
+				equalizerVertices.push(0.0); //g
+				equalizerVertices.push(0.0); //b
+
+				equalizerVertices.push(j); //x
+				equalizerVertices.push(dataArray[i]); //y
+				equalizerVertices.push(0.0); //z
+				equalizerVertices.push(1.0); //r
+				equalizerVertices.push(0.0); //g
+				equalizerVertices.push(0.0); //b
+				
+				equalizerVertices.push(j); //x
+				equalizerVertices.push(0.0); //y
+				equalizerVertices.push(0.0); //z
+				equalizerVertices.push(1.0); //r
+				equalizerVertices.push(0.0); //g
+				equalizerVertices.push(0.0); //b
+
+				equalizerVertices.push(j); //x
+				equalizerVertices.push(-dataArray[i]); //y
+				equalizerVertices.push(0.0); //z
+				equalizerVertices.push(1.0); //r
+				equalizerVertices.push(0.0); //g
+				equalizerVertices.push(0.0); //b
+
+		}		
+		
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(equalizerVertices), gl.DYNAMIC_DRAW);
 		
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);		
-		gl.drawArrays(gl.LINES, 0, bufferLength/2);
+		
+		gl.drawArrays(gl.LINES, 0, bufferLength*2);
 		
 		requestAnimationFrame(drawLoop);	
 	};
