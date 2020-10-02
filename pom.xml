@@ -20,8 +20,10 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
+					<warName>ROOT</warName>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<outputDirectory>${env.CATALINA_HOME}\webapps\</outputDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -113,17 +115,7 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${spring.security}</version>
 		</dependency>
-		
-		<dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.connector}</version>
-        </dependency>		
-		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-core</artifactId>
-		    <version>${hibernate}</version>
-		</dependency>      
+				      
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>

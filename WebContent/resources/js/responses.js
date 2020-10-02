@@ -43,7 +43,7 @@ function connect() {
 	        		userNameDiv.appendChild(nameSpan);
 	        		$("#username-div").slideDown(1000);
 	        	}
-	        	else if(messageType === "requestConversatioTopic"){	  
+	        	else if(messageType === "requestConversationTopic"){
 	        		topic = JSON.parse(messageFromServer.body).message;	   
 	        		var topicSpan = document.createElement("span");
 	        		topicSpan.innerHTML = topic;
@@ -94,7 +94,7 @@ function connect() {
 	    });		
 	}, 500);
 	
-	requestConversatioTopic();
+	requestConversationTopic();
 	requestUserName();	
 	pingServerLoop();
 }
@@ -127,10 +127,10 @@ function requestUserName(){
 	}, 2500);
 }
 
-function requestConversatioTopic(){
+function requestConversationTopic(){
 	setTimeout(function(){
 		var messageToServer = {
-			 	messageType: "requestConversatioTopic",
+			 	messageType: "requestConversationTopic",
 			  	message: lastResponseReceived,
 			  	conversationId: gup("conv_id", window.location.href)
 			};

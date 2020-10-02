@@ -52,3 +52,8 @@ Temporary Items
 .apdisk
 *.project
 *.class
+.idea/workspace.xml
+.idea/compiler.xml
+.idea/misc.xml
+.idea/sbt.xml
+.idea/vcs.xml

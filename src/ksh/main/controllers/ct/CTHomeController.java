@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ksh.main.ct.dao.ConversationDao;
-import ksh.main.models.ct.Conversation;
+//import ksh.main.ct.dao.ConversationDao;
+//import ksh.main.models.ct.Conversation;
 
 @Controller
 public class CTHomeController {

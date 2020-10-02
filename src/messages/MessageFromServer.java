@@ -2,7 +2,7 @@ package messages;
 
 import java.util.ArrayList;
 
-import ksh.main.models.ct.Message;
+//import ksh.main.models.ct.Message;
 import ksh.main.models.ct.MessageAbridged;
 
 public class MessageFromServer {

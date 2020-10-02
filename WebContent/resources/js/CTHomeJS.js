@@ -3,7 +3,7 @@ function sendquestionOrTopic() {
 		type : "GET",		
 		url : "/ct/start-new-conversation",
 		data : "topic=" +  encodeURIComponent(document.getElementById('questionOrTopic').value),		
-		success : function(id) {	
+		success : function(id) {
 			$(".question-container").slideUp({duration: 500});
 			$(".spinner-container").slideDown({duration: 500});
 			setTimeout(function(){ 
