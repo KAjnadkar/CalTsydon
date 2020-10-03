@@ -41,7 +41,7 @@
 	
 	<properties>
         <spring>4.2.6.RELEASE</spring>
-        <spring.security>4.1.0.RELEASE</spring.security>
+        <spring.security>5.4.0</spring.security>
         <timestamp>${maven.build.timestamp}</timestamp>
         <jackson>2.7.4</jackson>
         <hibernate>5.1.0.Final</hibernate>
