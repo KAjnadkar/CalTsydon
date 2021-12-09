@@ -43,7 +43,7 @@
         <spring>4.2.6.RELEASE</spring>
         <spring.security>4.1.0.RELEASE</spring.security>
         <timestamp>${maven.build.timestamp}</timestamp>
-        <jackson>2.7.4</jackson>
+        <jackson>2.9.10.8</jackson>
         <hibernate>5.1.0.Final</hibernate>
         <mysql.connector>5.1.39</mysql.connector>
     </properties>
