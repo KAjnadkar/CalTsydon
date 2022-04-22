@@ -40,7 +40,7 @@
 	</build>
 	
 	<properties>
-        <spring>4.2.6.RELEASE</spring>
+        <spring>5.3.19</spring>
         <spring.security>4.1.0.RELEASE</spring.security>
         <timestamp>${maven.build.timestamp}</timestamp>
         <jackson>2.7.4</jackson>
